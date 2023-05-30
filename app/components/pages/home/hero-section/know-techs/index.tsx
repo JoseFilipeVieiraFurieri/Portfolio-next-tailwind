@@ -14,7 +14,7 @@ export const KnowTechs = () => {
               name: 'Next.js',
               startDate: '2023-04-01',
             }}
-            key={`name/${index}`}
+            key={`${index}`}
           />
         ))}
       </div>
