@@ -1,25 +1,26 @@
+'use client'
+
 import { Button } from '@/app/components/button'
 import { TechBadge } from '@/app/components/techs'
+import { HomePageInfo } from '@/app/types/page-info'
+import { RichText } from '@/app/components/rich-text'
 import Image from 'next/image'
 import { HiArrowNarrowRight } from 'react-icons/hi'
 import { TbBrandGithub, TbBrandLinkedin, TbBrandWhatsapp } from 'react-icons/tb'
+import { CMSIcon } from '@/app/components/cms'
 
-const MOCK_CONTACTS = [
-  {
-    url: 'https://github.com/JoseFilipeVieiraFurieri',
-    icon: <TbBrandGithub />,
-  },
-  {
-    url: 'https://www.linkedin.com/in/jos%C3%A9-filipe-vieira-furieri-dev-67a4981b1/',
-    icon: <TbBrandLinkedin />,
-  },
-  {
-    url: 'https://github.com/JoseFilipeVieiraFurieri',
-    icon: <TbBrandWhatsapp />,
-  },
-]
+type HomeInfoProps = {
+  homeInfo: HomePageInfo
+}
 
-export const HeroSection = () => {
+export const HeroSection = ({ homeInfo }: HomeInfoProps) => {
+  const handleContact = () => {
+    const contactSection = document.querySelector('#contact')
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <section className="w-full lg:h-[755px] bg-hero-image bg-cover bg-center bg-no-repeat flex flex-col justify-end pb-10 sm:pb-32 py-32 lg:pb-[110px]">
       <div className="container flex items-start justify-between flex-col-reverse lg:flex-row">
@@ -27,27 +28,24 @@ export const HeroSection = () => {
           <p className="font-mono text-emerald-400">Bem vindo, meu nome é</p>
           <h2 className="text-4xl font-medium mt-2">José Filipe</h2>
 
-          <p className="text-gray-400 my-6 text-sm sm:text-base">
-            Sou um desenvolvedor web FullStack. Estou em transição de carreira
-            mas possuo muita vontade de aprender e me aprofundar ainda mais meus
-            conhecimentos, possuo como objetivo central tornar a tecnologia mais
-            inclusiva e humana.
-          </p>
+          <div className="text-gray-400 my-6 text-sm sm:text-base">
+            <RichText content={homeInfo[0].introduction.raw} />
+          </div>
 
           <div className="flex flex-wrap gap-x-2 gap-y-3 lg:max-w-[340px]">
-            {Array.from({ length: 7 }).map((_, index) => (
-              <TechBadge key={index} name="Next.js" />
+            {homeInfo[0].techs.map((item, index) => (
+              <TechBadge name={item.name} key={index} />
             ))}
           </div>
 
           <div className="mt-6 flex sm:items-center sm:gap-5 flex-col sm:flex-row">
-            <Button className=" w-max shadow-button">
+            <Button className=" w-max shadow-button" onClick={handleContact}>
               Contato
               <HiArrowNarrowRight size={18} />
             </Button>
 
             <div className="text-2xl text-gray-600 flex items-center h-20 gap-3">
-              {MOCK_CONTACTS.map((item, index) => (
+              {homeInfo[0].socials.map((item, index) => (
                 <a
                   href={item.url}
                   key={`contact-${index}`}
@@ -55,7 +53,7 @@ export const HeroSection = () => {
                   rel="noreferrer"
                   className="hover:text-gray-100 transition-colors"
                 >
-                  {item.icon}
+                  <CMSIcon icon={item.icon} />
                 </a>
               ))}
             </div>
@@ -66,7 +64,7 @@ export const HeroSection = () => {
           width={300}
           height={350}
           alt="profile photo"
-          src="/images/profile.jpeg"
+          src={homeInfo[0].profilePicture.url}
           className="w-[300px] h-[300px] lg:w-[420px] lg:h-[404px] mb-6 lg:mb-0 shadow-2xl rounded-lg object-cover"
         />
       </div>
@@ -83,3 +81,13 @@ export const HeroSection = () => {
 // lg: significa min-width 1024px
 
 // w-max funciona que o conteudo so ocupar o tamanho do que esta dentro( no caso do bottão seria o contato e o Icone)
+
+// a funçao handleContact, pega por um dom selector a classe o id da section de contanta e quando é clicado no
+// botão ele faz o scroll pra a tela de contato
+
+// uma observação, o typescript na tipagem sempre vai se comportar de acordo com o tipo  mesmo se vc de fato
+// receber um array, se vc dizer pro type que é um objeto vc não vai conseguir acessar pelo indice, pq objetos no JS
+// não podem ser acessados desse jeito. sobre todo resto do hygraph e questão de pratica e intimidade com a ferramenta
+
+// o CMS ICON serve pra convertar o texto lançado no HTML pra o icone em si. SO de lembrete, ele usa uma função nativa
+// do html pra isso

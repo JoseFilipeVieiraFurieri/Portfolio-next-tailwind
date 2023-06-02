@@ -1,6 +1,8 @@
 import { Button } from '@/app/components/button'
+import { Link } from '@/app/components/link-app'
 import { SectionTitle } from '@/app/components/section-title'
 import { TechBadge } from '@/app/components/techs'
+import { HiArrowNarrowLeft } from 'react-icons/hi'
 import { TbBrandGithub } from 'react-icons/tb'
 
 export const ProjectDetails = () => {
@@ -15,7 +17,7 @@ export const ProjectDetails = () => {
       <SectionTitle
         subtitle="projetos"
         title="Delivery app"
-        className="text-center items-center sm:[text-left]"
+        className="text-center items-center sm:[&:>h3]:text-4xl"
       />
 
       <p className="text-gray-400 text-center max-w-[640px] sm:my-6 text-sm sm:text-base">
@@ -43,6 +45,10 @@ export const ProjectDetails = () => {
           </Button>
         </a>
       </div>
+      <Link href="/projects">
+        <HiArrowNarrowLeft />
+        Voltar pra projetos
+      </Link>
     </section>
   )
 }

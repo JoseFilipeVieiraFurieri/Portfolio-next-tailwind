@@ -2,6 +2,7 @@ import { Inter, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { ReactNode } from 'react'
 import { Header } from './components/header'
+import { BackToTop } from './components/back-to-black'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Header />
         {children}
       </body>
+      <BackToTop />
     </html>
   )
 }
