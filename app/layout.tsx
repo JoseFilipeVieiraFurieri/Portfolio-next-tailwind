@@ -4,6 +4,14 @@ import { ReactNode } from 'react'
 import { Header } from './components/header'
 import { BackToTop } from './components/back-to-black'
 
+export const metadata = {
+  title: {
+    default: 'Home',
+    template: '%s | José Filipe',
+  },
+  icons: [{ url: '/images/logo2.png' }],
+}
+
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],

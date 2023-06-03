@@ -23,7 +23,6 @@ type expItemProps = {
 }
 
 export const ExpItem = ({ exp }: expItemProps) => {
-  console.log(exp)
   return (
     <div className="grid grid-cols-[40px,1fr] gap-4 md:gap-10">
       <div className="flex flex-col items-center gap-4">

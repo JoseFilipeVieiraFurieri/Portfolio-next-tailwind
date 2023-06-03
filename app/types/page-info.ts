@@ -22,7 +22,21 @@ export type HomePageInfo = [
   },
 ]
 
+export type ProjectsPageData2 = {
+  project: Project
+}
+
+export type ProjectsPageData = {
+  projects: Project[]
+}
+
 export type HomePageData = {
   pages: HomePageInfo
   workExperiences: workExperience[]
+}
+
+export type ProjectsPageStaticData = {
+  projects: {
+    slug: string
+  }[]
 }

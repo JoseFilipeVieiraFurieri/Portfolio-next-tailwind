@@ -27,6 +27,7 @@ export type Project = {
   sections: ProjectSession[]
   description: {
     raw: RichTextContent
+    text: string
   }
   githubUrl?: string
 }

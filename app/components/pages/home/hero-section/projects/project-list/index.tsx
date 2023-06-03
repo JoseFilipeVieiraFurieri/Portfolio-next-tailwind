@@ -1,12 +1,19 @@
 import { ProjectCard } from '../../projects/project-list/project-card'
 import Link from 'next/link'
+import { Project } from '@/app/types/projects'
 
-export const ProjectList = () => {
+type ProjectListProps = {
+  projects: Project[]
+}
+
+export const ProjectList = ({ projects }: ProjectListProps) => {
   return (
     <section className="container py-32 grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-x-4 gap-y-6">
-      <Link href="/projects/book">
-        <ProjectCard />
-      </Link>
+      {projects.map((item) => (
+        <Link key={item.title} href={`/projects/${item.slug}`}>
+          <ProjectCard project={item} />
+        </Link>
+      ))}
     </section>
   )
 }
