@@ -13,7 +13,7 @@ export const metadata = {
 
 const getPageData = async (): Promise<HomePageData> => {
   const query = `
-  query MyQuery {
+  query PageInfoQuery {
     pages(where: {slug: "home"}) {
       introduction {
         raw
@@ -33,6 +33,35 @@ const getPageData = async (): Promise<HomePageData> => {
         name
         startDate
       }
+      hightlightProjects(where: {}) {
+        slug
+        thumbnail {
+          url
+        }
+        title
+        shortDescription
+        teches {
+          name
+        }
+      }
+    }
+    workExperiences {
+      companyLogo {
+        url
+      }
+      role
+      companyName
+      companyUrl
+      description {
+        raw
+      }
+      teches {
+        name
+      }
+      certification {
+        url
+      }
+      linkCertificado
     }
   }
   `
@@ -44,14 +73,16 @@ const getPageData = async (): Promise<HomePageData> => {
 }
 
 export default async function Home() {
-  const { pages: pageData } = await getPageData()
+  const { pages: pageData, workExperiences } = await getPageData()
+
+  console.log(workExperiences)
 
   return (
     <>
       <HeroSection homeInfo={pageData} />
-      <KnowTechs />
-      <PinnedProjects />
-      <WorkExp />
+      <KnowTechs techs={pageData[0].knownTechs} />
+      <PinnedProjects projects={pageData[0].hightlightProjects} />
+      <WorkExp exp={workExperiences} />
       <ContactForm />
       <Footer />
     </>
