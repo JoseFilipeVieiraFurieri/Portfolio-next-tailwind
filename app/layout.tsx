@@ -3,6 +3,7 @@ import './globals.css'
 import { ReactNode } from 'react'
 import { Header } from './components/header'
 import { BackToTop } from './components/back-to-black'
+import { Toaster } from './components/toaster'
 
 export const metadata = {
   title: {
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <Header />
         {children}
+        <Toaster />
       </body>
       <BackToTop />
     </html>
