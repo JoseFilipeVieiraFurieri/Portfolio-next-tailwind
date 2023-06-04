@@ -14,7 +14,7 @@ type ProjectProps = {
   }
 }
 
-export const metadata = {
+const metadata = {
   title: 'Project',
 }
 
