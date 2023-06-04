@@ -77,7 +77,7 @@ export async function generateStaticParams() {
   return projects
 }
 
-export async function generateMetaData({
+export async function generateMetadata({
   params: { slug },
 }: ProjectProps): Promise<Metadata> {
   const data = await getPageProject(slug)
