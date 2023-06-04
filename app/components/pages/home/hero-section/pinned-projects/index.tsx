@@ -1,9 +1,12 @@
+'use client'
+
 import { HorizontalDivider } from '@/app/components/divider/horizontal-line'
 import { SectionTitle } from '@/app/components/section-title'
 import { ProjectCard } from './project-card'
 import { Link } from '@/app/components/link-app'
 import { HiArrowNarrowRight } from 'react-icons/hi'
 import { Project } from '@/app/types/projects'
+import { use } from 'react'
 
 type PinnedProjectsProps = {
   projects: Project[]

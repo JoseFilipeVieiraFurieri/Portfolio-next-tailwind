@@ -1,8 +1,10 @@
+'use client'
+
 import Image from 'next/image'
 import { RichTextContent } from '@graphcms/rich-text-types'
-import { log } from 'console'
 import { RichText } from '@graphcms/rich-text-react-renderer'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 type expItemProps = {
   exp: {
@@ -24,7 +26,13 @@ type expItemProps = {
 
 export const ExpItem = ({ exp }: expItemProps) => {
   return (
-    <div className="grid grid-cols-[40px,1fr] gap-4 md:gap-10">
+    <motion.div
+      className="grid grid-cols-[40px,1fr] gap-4 md:gap-10"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="flex flex-col items-center gap-4">
         <div className="round full border border-gray-500 p-0.5">
           <Image
@@ -68,7 +76,7 @@ export const ExpItem = ({ exp }: expItemProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
